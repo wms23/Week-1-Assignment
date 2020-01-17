@@ -20,7 +20,7 @@ window.Vue = require('vue');
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-
+Vue.component('checkout-form',require('./components/CheckoutForm.vue').default);
 Vue.component('product-list-item',require('./components/ProductListItem.vue').default);
 Vue.component('product-detail-holder',require('./components/ProductDetailHolder.vue').default);
 Vue.component('cart-item',require('./components/CartItem.vue').default);

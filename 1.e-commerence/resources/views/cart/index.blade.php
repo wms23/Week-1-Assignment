@@ -3,16 +3,27 @@
 @section('content')
 
     <cart-list>
-    @foreach($items as $item)
-        <cart-item 
+    @foreach($current_cart->items as $item)
+        <cart-item
             image_url="{{$item->product->image_url}}"
             price="{{$item->product->price}}"
             qty="{{$item->qty}}">
             {{$item->product->name}}
+            <form slot="delete_form" action="{{route('cart-item.destroy',$item->id)}}" method="POST">
+                @csrf
+                @method("DELETE")
+                <button class="btn btn-danger">Remove</button>
+            </form>
         </cart-item>
     @endforeach
     </cart-list>
-    <div class="col-1 border mt-3">
+
+    <checkout-form
+        total_price="{{$current_cart->total_price}}"
+        csrf="{{ csrf_token() }}"
+        action_url="{{ route('transaction.store') }}">
+    </checkout-form>
+    <!-- <div class="col-1 border mt-3">
         <div class="form-group mt-3">
             <label for="coupon">Coupon Code</label>
             <input type="text" class="form-control" id="coupon" aria-describedby="couponHelp">
@@ -22,6 +33,6 @@
             Total : <span class="font-weight-bold text-success"> {{ "xxx" }} USD<span>
         </div>
         <button type="submit" class="btn btn-primary">Checkout</button>
-    </div>
-    
+    </div> -->
+
 @endsection
